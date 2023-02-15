@@ -20,39 +20,45 @@ function App() {
   }, [])
 
   return (
-    <div >
-      <h1>Movie ranking</h1>
-      <div>
-        <button className='btop10'>Top 10 revenue</button>
-        <button className='btop10Y'> Top 10 revenue per Year</button>
-        <button className='refresh'><BiRefresh /></button>
-      </div>
-      <table className="table">
-
-        <th>Ranking</th>
-        <th>Title</th>
-        <th>Year</th>
-        <th>Revenue</th>
-        <th></th>
-        {data.map(item => {
-          return (
-            <tr>
-              <td>1</td>
-              <td>{item.title}</td>
-              <td>{item.year}</td>
-              <td>{item.revenue}</td>
-              <td><button><AiFillEye /></button></td>
-            </tr>
-          )
-        })}
-
-
-
-
-
-      </table>
+    <>
+    <div className='retangulo'>
 
     </div>
+      <div className='all'>
+        <h1 className='title'>Movie ranking</h1>
+        <div >
+          <button className='btop10'>Top 10 revenue</button>
+          <button className='btop10Y'> Top 10 revenue per Year</button>
+          <button className='refresh'><BiRefresh /></button>
+        </div>
+        <table className="table">
+          <thead>
+            <tr>
+            <th className='thrank'>Ranking</th>
+            <th className='thtitle'>Title</th>
+            <th className='thyear'>Year</th>
+            <th className='threvenue'>Revenue</th>
+            <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map(item => {
+              return (
+                <tr key={item.id}>
+                  <td className='rank'>1</td>
+                  <td className='title' >{item.title}</td>
+                  <td className='year'>{item.year}</td>
+                  <td className='revenue'>{item.revenue}</td>
+                  <td><button className='eye'><AiFillEye /></button></td>
+                </tr>
+              )
+            })}
+          </tbody>
+
+        </table>
+
+      </div>
+    </>
   );
 }
 

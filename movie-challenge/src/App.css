@@ -1,10 +1,35 @@
-.App {
-  text-align: center;
+.all {
+  margin-left: 214px;
+  margin-top: 64px;
+}
+
+.retangulo {
+  height: 50px;
+  background: var(--unnamed-color-012433) 0% 0% no-repeat padding-box;
+  background: #012433 0% 0% no-repeat padding-box;
+  opacity: 1;
+}
+.title {
+  top: 74px;
+  left: 214px;
+  width: 149px;
+  height: 29px;
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 24px / var(--unnamed-line-spacing-12)
+    Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-386071);
+  text-align: left;
+  font: normal normal normal 24px/12px Roboto;
+  letter-spacing: 0px;
+  color: #386071;
+  opacity: 1;
 }
 
 .table {
   width: auto;
   height: auto;
+  margin-top: 30px;
   padding: "5px 10px";
 }
 .btop10 {
@@ -30,13 +55,143 @@
   border: 1px solid #78849e66;
   border-radius: 20px;
   opacity: 1;
+  margin-left: 25px;
 }
 .refresh {
   top: 135px;
-  height: 30px;
-  
+  height: 50px;
+
   background: #ffffff 0% 0% no-repeat padding-box;
   border: none;
   opacity: 1;
+}
+.thrank {
+  top: 211px;
+  left: 233px;
+  width: 44px;
+  height: 13px;
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-10) / 20px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: center;
+  font: normal normal bold 10px/20px Roboto;
+  letter-spacing: 0px;
+  color: #0b749b;
+  opacity: 1;
+}
 
+.thtitle {
+  top: 211px;
+  left: 309px;
+  width: 80px;
+  height: 13px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-10) / 20px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: center;
+  font: normal normal bold 10px/20px Roboto;
+  letter-spacing: 0px;
+  color: #0b749b;
+  opacity: 1;
+}
+
+.rank {
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 16px/20px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: center;
+  font: normal normal normal 16px/20px Roboto;
+  letter-spacing: 0px;
+  color: #536b7a;
+  opacity: 1;
+}
+.title {
+  top: 245px;
+  left: 309px;
+  width: 150px;
+  height: 19px;
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 16px/20px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 16px/20px Roboto;
+  letter-spacing: 0px;
+  color: #536b7a;
+  opacity: 1;
+}
+.year {
+  height: 19px;
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 16px/20px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: center;
+  font: normal normal normal 16px/20px Roboto;
+  letter-spacing: 0px;
+  color: #536b7a;
+  opacity: 1;
+}
+
+.revenue {
+  top: 245px;
+  left: 879px;
+  width: 108px;
+  height: 19px;
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 16px/20px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 16px/20px Roboto;
+  letter-spacing: 0px;
+  color: #536b7a;
+  opacity: 1;
+}
+.eye {
+  top: 135px;
+  height: 50px;
+
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: none;
+  opacity: 1;
+}
+
+th,
+td {
+ 
+  border-style:solid;
+  border-bottom-width: 1px;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+}
+.thyear {
+  top: 211px;
+  left: 736px;
+  width: 24px;
+  height: 13px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-10) / 20px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: center;
+  font: normal normal bold 10px/20px Roboto;
+  letter-spacing: 0px;
+  color: #0b749b;
+  opacity: 1;
+}
+
+.threvenue {
+  top: 211px;
+  left: 879px;
+  width: 44px;
+  height: 13px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-10) / 20px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: center;
+  font: normal normal bold 10px/20px Roboto;
+  letter-spacing: 0px;
+  color: #0b749b;
+  opacity: 1;
 }
