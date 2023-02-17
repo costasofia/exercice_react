@@ -2,6 +2,7 @@
   margin-left: 250px;
   margin-top: 64px;
   align-content: center;
+  align-items: center;
 }
 
 .retangulo {
@@ -30,7 +31,7 @@
   width: auto;
   height: auto;
   margin-top: 30px;
-  padding: "5px 10px";
+  padding: "40px 40px";
 }
 .btop10 {
   top: 135px;
@@ -279,6 +280,7 @@ table,
 tr {
   border: 1px solid black;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 p.a {

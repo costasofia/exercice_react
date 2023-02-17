@@ -12,6 +12,7 @@ import Select from 'react-select';
 function App() {
   const [movie, setMovie] = useState([]);
 
+  //Botao dropdown
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -20,28 +21,28 @@ function App() {
 
 
 
-  const fetchData = () => {
+  function fetchData() {
     return axios.get(`http://localhost:4000/movies`)
       .then(function (response) {
         setMovie(response.data);
       });
-   
+
   };
 
-/*
-  const fetchData =()=>{
-    const ENDPOINT = 'http://localhost:4000/movies';
-   const URL_CONFIGURED = `${ENDPOINT}?_page=1&limit=1`;
-    fetch(URL_CONFIGURED )
-      .then((response)=> response.json())
-      .then((newMovies)=> setMovie((prevMovies)=> [...prevMovies, ...newMovies]))
-     // .then((newMovies)=> setMovie([ ...newMovies]))
-  }
-*/
+  /*
+    const fetchData =()=>{
+      const ENDPOINT = 'http://localhost:4000/movies';
+     const URL_CONFIGURED = `${ENDPOINT}?_page=1&limit=1`;
+      fetch(URL_CONFIGURED )
+        .then((response)=> response.json())
+       // .then((newMovies)=> setMovie((prevMovies)=> [...prevMovies, ...newMovies]))
+        .then((newMovies)=> setMovie([ ...newMovies]))
+    }
+  */
   const handleScroll = (e) => {
-    console.log('hi');
-    console.log(e.target.documentElement.scrollTop);
-    console.log(e.target.documentElement.scrollHeight);
+   // console.log('hi');
+   // console.log(e.target.documentElement.scrollTop);
+   // console.log(e.target.documentElement.scrollHeight);
     if (window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight) {
       fetchData();
     }
@@ -57,10 +58,10 @@ function App() {
 
     if (word === "top10") {
       let topDados = movie.map(({ revenue }) => revenue)
-        .sort((a, b) => b.revenue - a.revenue)
-        .slice(0, 5)
+        .sort((a, b) => b - a)
+        .slice(0, 4)
 
-      console.log(topDados)
+      //console.log(topDados)
 
 
       let top10 = movie.filter(({ revenue }) => topDados.includes(revenue)).sort((a, b) => b.revenue - a.revenue);
@@ -69,7 +70,7 @@ function App() {
       setMovie(top10);
 
     } else if (word === "clean") {
-      console.log('clean')
+      //  console.log('clean')
       fetchData();
     }
   }
@@ -77,10 +78,13 @@ function App() {
   const handleBtn2 = (e) => {
     let ano = e.target.value;
 
-    let topData = movie.map(({ revenue }) => revenue)
-      .sort((a, b) => b.revenue - a.revenue)
-      .slice(0, 2)
-    let top10Y = movie.filter(({ revenue }) => topData.includes(revenue)).sort((a, b) => b.revenue - a.revenue) && movie.filter(dados => dados.year === ano);;
+    let topDataMovie = movie.map(({ revenue }) => revenue)
+      .sort((a, b) => b - a)
+      .slice(0, 3)
+
+      console.log(topDataMovie)
+
+    let top10Y = movie.filter(({ revenue }) => topDataMovie.includes(revenue)).sort((a, b) => b.revenue - a.revenue) && movie.filter(dados => dados.year === ano);;
     setMovie(top10Y);
   }
 
@@ -102,7 +106,8 @@ function App() {
   const filterYear = movie.filter((year) => {
     const duplicatedYear = setYear.has(year.year);
     setYear.add(year.year);
-    console.log(duplicatedYear);
+
+    //console.log(duplicatedYear);
     return !duplicatedYear;
   })
 
