@@ -10,8 +10,8 @@ import Select from 'react-select';
 
 
 function App() {
-  const [movie, setMovie] = useState([]);
-
+  const [movies, setMovies] = useState([]);
+  const [mobieById, setMobieById] = useState([]);
   //Botao dropdown
   const [open, setOpen] = useState(false);
 
@@ -20,14 +20,31 @@ function App() {
   };
 
 
+/*
+  function fetchMovieById(id) {
+    console.log(id);
+    return axios.get(`http://localhost:4000/movies/${id}`)
+      .then(function (response) {
+        setMobieById(response.data)
+        console.log(response.data)
+      });
+  };
+*/
 
-  function fetchData() {
+const fetchMovieById = (year)=>{
+    let idMovie = year;
+    console.log(idMovie);
+}
+
+  function fetchAllMovies() {
     return axios.get(`http://localhost:4000/movies`)
       .then(function (response) {
-        setMovie(response.data);
+        setMovies(response.data);
       });
 
   };
+
+
 
   /*
     const fetchData =()=>{
@@ -35,21 +52,22 @@ function App() {
      const URL_CONFIGURED = `${ENDPOINT}?_page=1&limit=1`;
       fetch(URL_CONFIGURED )
         .then((response)=> response.json())
-       // .then((newMovies)=> setMovie((prevMovies)=> [...prevMovies, ...newMovies]))
-        .then((newMovies)=> setMovie([ ...newMovies]))
+       .then((newMovies)=> setMovie((prevMovies)=> [...prevMovies, ...newMovies]))
+       // .then((newMovies)=> setMovie([ ...newMovies]))
     }
   */
-  const handleScroll = (e) => {
-   // console.log('hi');
-   // console.log(e.target.documentElement.scrollTop);
-   // console.log(e.target.documentElement.scrollHeight);
+  /*const handleScroll = (e) => {
+    // console.log('hi');
+    // console.log(e.target.documentElement.scrollTop);
+    // console.log(e.target.documentElement.scrollHeight);
     if (window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight) {
       fetchData();
     }
-  }
+  }*/
   useEffect(() => {
-    fetchData();
-    window.addEventListener('scroll', handleScroll);
+    fetchAllMovies();
+    fetchMovieById();
+    //  window.addEventListener('scroll', handleScroll);
   }, []);
 
 
@@ -57,37 +75,39 @@ function App() {
     let word = e.target.value;
 
     if (word === "top10") {
-      let topDados = movie.map(({ revenue }) => revenue)
-        .sort((a, b) => b - a)
-        .slice(0, 4)
+      let topDados = movies.map(({ revenue }) => revenue)
+        .sort((a, b) => b.revenue - a.revenue)
+        .slice(0, 10)
 
       //console.log(topDados)
 
 
-      let top10 = movie.filter(({ revenue }) => topDados.includes(revenue)).sort((a, b) => b.revenue - a.revenue);
+      let top10 = movies.filter(({ revenue }) => topDados.includes(revenue)).sort((a, b) => b.revenue - a.revenue);
 
       //console.log(top10);
-      setMovie(top10);
+      setMovies(top10);
 
     } else if (word === "clean") {
       //  console.log('clean')
-      fetchData();
+      fetchAllMovies();
     }
   }
 
   const handleBtn2 = (e) => {
     let ano = e.target.value;
 
-    let topDataMovie = movie.map(({ revenue }) => revenue)
-      .sort((a, b) => b - a)
-      .slice(0, 3)
+    //  console.log(ano);
 
-      console.log(topDataMovie)
+    let moviesByYear = movies.filter((element) => element.year === ano);
+    // console.log(moviesByYear);
 
-    let top10Y = movie.filter(({ revenue }) => topDataMovie.includes(revenue)).sort((a, b) => b.revenue - a.revenue) && movie.filter(dados => dados.year === ano);;
-    setMovie(top10Y);
+    let moviesByRevenue = moviesByYear.sort((a, b) => b.revenue - a.revenue)
+    console.log(moviesByRevenue);
+
+    let moviesTop10ByRevenue = moviesByRevenue.slice(0, 10);
+
+    setMovies(moviesTop10ByRevenue);
   }
-
 
   //fechar e abrir o popup
   const [popuptogle, setpopuptogle] = useState(false);
@@ -103,7 +123,7 @@ function App() {
   existe num objeto set ou não*/
 
   const setYear = new Set();
-  const filterYear = movie.filter((year) => {
+  const filterYear = movies.filter((year) => {
     const duplicatedYear = setYear.has(year.year);
     setYear.add(year.year);
 
@@ -153,7 +173,7 @@ function App() {
             </thead>
             <tbody>
 
-              {movie.map((item, index) => {
+              {movies.map((item, index) => {
 
                 return (
                   <tr key={index}>
@@ -165,7 +185,7 @@ function App() {
 
                     <td className='revenue'>{item.revenue}</td>
 
-                    <td><button className='eye' onClick={() => changecontent(item)}><AiFillEye /></button></td>
+                    <td><button className='eye' onClick={() => fetchAllMovies(item.year)}><AiFillEye /></button></td>
                   </tr>
                 )
 
