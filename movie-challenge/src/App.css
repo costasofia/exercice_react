@@ -1,6 +1,7 @@
 .all {
-  margin-left: 214px;
+  margin-left: 250px;
   margin-top: 64px;
+  align-content: center;
 }
 
 .retangulo {
@@ -14,13 +15,12 @@
   left: 214px;
   width: 149px;
   height: 29px;
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) 24px / var(--unnamed-line-spacing-12)
-    Roboto;
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-10) / 20px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--unnamed-color-386071);
   text-align: left;
-  font: normal normal normal 24px/12px Roboto;
+  font: normal normal bold 20px/20px Roboto;
   letter-spacing: 0px;
   color: #386071;
   opacity: 1;
@@ -59,11 +59,17 @@
 }
 .refresh {
   top: 135px;
-  height: 50px;
-
+  left: 338px;
+  width: 20px;
+  height: 30px;
+  margin-left: 4px;
+  margin-top: 25px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: none;
+  border: 2px;
   opacity: 1;
+
+  border-radius: 20px;
+  padding-left: 2px;
 }
 .thrank {
   top: 211px;
@@ -73,24 +79,25 @@
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-10) / 20px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: center;
-  font: normal normal bold 10px/20px Roboto;
+  text-align: left;
+  font: normal normal bold 20px/20px Roboto;
   letter-spacing: 0px;
   color: #0b749b;
   opacity: 1;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .thtitle {
   top: 211px;
   left: 309px;
-  width: 80px;
+  width: 2px;
   height: 13px;
-  /* UI Properties */
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-10) / 20px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: center;
-  font: normal normal bold 10px/20px Roboto;
+  text-align: left;
+  font: normal normal bold 20px/20px Roboto;
   letter-spacing: 0px;
   color: #0b749b;
   opacity: 1;
@@ -130,12 +137,13 @@
   letter-spacing: 0px;
   color: #536b7a;
   opacity: 1;
+  padding-right: 15px;
 }
 
 .revenue {
   top: 245px;
   left: 879px;
-  width: 108px;
+  width: 80px;
   height: 19px;
   font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) 16px/20px Roboto;
@@ -149,21 +157,18 @@
 .eye {
   top: 135px;
   height: 50px;
-
+  width: 108px;
+  text-align: center;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: none;
+  opacity: 1;
+}
+.bclose {
   background: #ffffff 0% 0% no-repeat padding-box;
   border: none;
   opacity: 1;
 }
 
-th,
-td {
- 
-  border-style:solid;
-  border-bottom-width: 1px;
-  border-top-width: 0;
-  border-right-width: 0;
-  border-left-width: 0;
-}
 .thyear {
   top: 211px;
   left: 736px;
@@ -173,8 +178,8 @@ td {
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-10) / 20px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: center;
-  font: normal normal bold 10px/20px Roboto;
+  text-align: left;
+  font: normal normal bold 20px/20px Roboto;
   letter-spacing: 0px;
   color: #0b749b;
   opacity: 1;
@@ -189,9 +194,418 @@ td {
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
     var(--unnamed-font-size-10) / 20px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: center;
-  font: normal normal bold 10px/20px Roboto;
+  text-align: left;
+  font: normal normal bold 20px/20px Roboto;
   letter-spacing: 0px;
   color: #0b749b;
   opacity: 1;
+}
+.pop_up_container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(0, 0, 0, 0.5);
+  padding-top: 3%;
+}
+.pop_up_body {
+  width: 50%;
+  height: 97%;
+  background-color: #fff;
+  margin: auto;
+}
+
+.pop_up_header {
+  width: 100%;
+  text-align: right;
+}
+.pop_up_content {
+  text-align: left;
+  margin-left: 10%;
+  margin-top: 1%;
+}
+
+.dropdown {
+  top: 135px;
+  left: 338px;
+  width: 180px;
+  height: 30px;
+  /* UI Properties */
+  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #78849e66;
+  border-radius: 20px;
+  opacity: 1;
+  margin-left: 25px;
+}
+
+.menu {
+  position: absolute;
+
+  list-style-type: none;
+  margin: 5px 0;
+  padding: 0;
+
+  border: 1px solid grey;
+  width: 150px;
+}
+
+.menu > li {
+  margin: 0;
+
+  background-color: white;
+}
+
+.menu > li:hover {
+  background-color: lightgray;
+}
+
+.menu > li > button {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 5px;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+table,
+tr {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+p.a {
+  display: inline; /* the default for span */
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid blue;
+  background-color: yellow;
+}
+
+.popTitle {
+ 
+  margin-left: 2px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal 300 30px/38px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  font: normal normal 200 22px/38px Roboto;
+  letter-spacing: 0px;
+  color: #164e78;
+  opacity: 1;
+}
+.popYear {
+  top: 165px;
+  left: 368px;
+  width: 28px;
+  height: 17px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+}
+.popGenre {
+  top: 222px;
+  left: 368px;
+  width: 37px;
+  height: 17px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+}
+
+.popDescription {
+  top: 279px;
+  left: 367px;
+  width: 71px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+}
+.popDirector {
+  top: 407px;
+  left: 367px;
+  width: 49px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+  display: inline;
+  padding-right: 10px;
+}
+.popActors {
+  top: 407px;
+  left: 506px;
+  width: 41px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+  display: inline;
+}
+.popRutime {
+  top: 463px;
+  left: 367px;
+  width: 52px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+}
+.popRating {
+  top: 520px;
+  left: 367px;
+  width: 43px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+}
+.popVotes {
+  top: 577px;
+  left: 367px;
+  width: 36px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+}
+.popRevenue {
+  top: 634px;
+  left: 367px;
+  width: 53px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+}
+.popMetascore {
+  top: 690px;
+  left: 367px;
+  width: 66px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 14px/17px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #78849eb9;
+  opacity: 1;
+}
+.popRYear {
+  top: 180px;
+  left: 368px;
+  width: 36px;
+  height: 15px;
+  font: var(--unnamed-font-style-normal) normal medium 12px/19px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 12px/19px Roboto;
+  letter-spacing: 0px;
+  color: #78849e;
+  opacity: 1;
+}
+.popRGenre {
+  top: 243px;
+  left: 368px;
+  width: 175px;
+  height: 15px;
+  font: var(--unnamed-font-style-normal) normal medium 16px/19px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 12px/19px Roboto;
+  letter-spacing: 0px;
+  color: #78849e;
+  opacity: 1;
+}
+
+.popRDescription {
+  top: 300px;
+  left: 367px;
+  width: 628px;
+  height: 35px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal medium 16px/24px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 12px/24px Roboto;
+  letter-spacing: 0px;
+  color: #78849e;
+  opacity: 1;
+}
+.popRDirector {
+  top: 428px;
+  left: 367px;
+  width: 91px;
+  height: 15px;
+  font: var(--unnamed-font-style-normal) normal medium 16px/19px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 12px/19px Roboto;
+  letter-spacing: 0px;
+  color: #00baff;
+  opacity: 1;
+  display: inline;
+  padding-right: 10px;
+}
+.popRActors {
+  top: 428px;
+  left: 506px;
+  width: 388px;
+  height: 15px;
+  /* UI Properties */
+  font: var(--unnamed-font-style-normal) normal medium 16px/19px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 12px/19px Roboto;
+  letter-spacing: 0px;
+  color: #00baff;
+  opacity: 1;
+  display: inline;
+}
+
+.popRRuntime {
+  top: 484px;
+  left: 367px;
+  width: 66px;
+  height: 15px;
+  font: var(--unnamed-font-style-normal) normal medium 16px/19px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 12px/19px Roboto;
+  letter-spacing: 0px;
+  color: #78849e;
+  opacity: 1;
+}
+.popRRating {
+  top: 541px;
+  left: 367px;
+  width: 23px;
+  height: 15px;
+  font: var(--unnamed-font-style-normal) normal medium 16px/19px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 12px/19px Roboto;
+  letter-spacing: 0px;
+  color: #78849e;
+  opacity: 1;
+}
+.linha{
+  display: inline;
+  padding-right: 20px;
+}
+.popRVotes{
+  top: 598px;
+left: 367px;
+width: 55px;
+height: 15px;
+/* UI Properties */
+font: var(--unnamed-font-style-normal) normal medium 16px/19px Roboto;
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+font: normal normal medium 12px/19px Roboto;
+letter-spacing: 0px;
+color: #78849E;
+opacity: 1;
+}
+.popRRevenue{
+  top: 655px;
+left: 367px;
+width: 111px;
+height: 15px;
+font: var(--unnamed-font-style-normal) normal medium 16px/19px Roboto;
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+font: normal normal medium 12px/19px Roboto;
+letter-spacing: 0px;
+color: #78849E;
+opacity: 1;
+}
+.popRMetascore {
+  top: 711px;
+left: 367px;
+width: 18px;
+height: 15px;
+/* UI Properties */
+font: var(--unnamed-font-style-normal) normal medium 16px/19px Roboto;
+letter-spacing: var(--unnamed-character-spacing-0);
+text-align: left;
+font: normal normal medium 12px/19px Roboto;
+letter-spacing: 0px;
+color: #78849E;
+opacity: 1;
+}
+.espaco{
+  top: 149px;
+left: 367px;
+width: 52px;
+height: 0px;
+/* UI Properties */
+border: 2px solid var(--unnamed-color-21b3cf);
+background: transparent  0% 0% no-repeat padding-box;
+border: 2px solid #21B3CF;
+opacity: 1;
 }

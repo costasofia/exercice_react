@@ -15,7 +15,7 @@ module.exports = db.sequelize.define('movie', {
         type:Sequelize.INTEGER,
         allowNull: false
     },
-    rank:{
+    ranking:{
         type:Sequelize.INTEGER,
         allowNull: false
     },
