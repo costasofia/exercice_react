@@ -5,7 +5,7 @@ movie.use(cors());
 
 const Movie = require("../models/movie.model");
 const { sequelize } = require("../database/db");
-
+/*
 movie.get("/", (req, res) => {
    // let page = parseInt(req.query.page);
     let limitQuery = parseInt(req.query.limitQuery);
@@ -20,7 +20,18 @@ movie.get("/", (req, res) => {
             res.send(err);
         })
 });
+*/
 
+movie.get("/",async (req, res) => {
+    const page = parseInt(req.query.page);
+    const size = parseInt(req.query.size);
+
+    const movies = await Movie.findAndCountAll({
+       limit:size, 
+       offset:page*size
+    });
+    res.send(movies);
+})
 
 movie.get("/:id", (req, res) => {
     Movie.findOne({

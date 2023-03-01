@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import "./App.css";
+
 import "./PopUp.css";
 import { AiFillEye } from "react-icons/ai";
 import { BiRefresh } from "react-icons/bi";
@@ -7,13 +7,22 @@ import { useEffect, useState, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import listYears from "./years.json";
-import Reload from "./Reload";
+import Nav from "react-bootstrap/Nav";
 import React from "react";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import "./App.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
 
 function App() {
   let offset = 0;
 
   const refreshWindow = () => window.location.reload(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [show, setShow] = useState(false);
   const [movies, setMovies] = useState([]);
   const [moviesById, setMoviesById] = useState({
@@ -42,17 +51,19 @@ function App() {
 
   let limit = 10;
   const fetchAllMovies = () => {
+    setIsLoading(true);
     axios
       .get(`http://localhost:4000/movies?limitQuery=${limit}&offset=${offset}`)
       .then(({ data }) => {
-        //setMovies(data)
+
 
         const newMovies = [];
         data.forEach((data) => newMovies.push(data));
 
         setMovies((oldMovies) => [...oldMovies, ...newMovies]);
         //    console.log(data)
-        console.log(newMovies);
+          console.log(newMovies);
+          setIsLoading(false);
       });
 
     offset += 10;
@@ -114,22 +125,21 @@ function App() {
 
   return (
     <>
-      <div className="retangulo"></div>
-      <div className="container">
+      <nav
+        style={{
+          backgroundSize: "0",
+          backgroundColor: "#012433",
+          height: "50px",
+        }}
+      ></nav>
+      <div className="flex-container">
         <div className="box">
-          <h1 className="title">Movie ranking</h1>
-          <div className="divButtons">
-            <button className="btop10" value="top10" onClick={btnTop10Revenue}>
-              Top 10 revenue
-            </button>
+          <h1 className="title" >Movie ranking</h1>
+          <div className="d-grid gap-3 d-md-block" style={{ marginTop: "40px", marginBottom: '30px', verticalAlign: "middle !important" }}>
 
-            <button
-              className="btop10Y"
-              onClick={() => setOpen(!open)}
-              defaultValue="default"
-            >
-              Top 10 revenue per Year
-              {open && open ? (
+            <button className="btnTop10" onClick={btnTop10Revenue}> Top 10 revenue</button>
+            <button onClick={() => setOpen(!open)}
+              defaultValue="default" className="btnTop10Y" > Top 10 revenue per Year  {open && open ? (
                 <ul className="menu">
                   <p className="messageSelect">Select a year</p>
 
@@ -144,11 +154,9 @@ function App() {
                     </li>
                   ))}
                 </ul>
-              ) : null}
-            </button>
-
+              ) : null}</button>
             {show && (
-              <button className="refresh" value="clean" onClick={refreshWindow}>
+              <button className="btnRefresh" onClick={refreshWindow}>
                 <BiRefresh />
               </button>
             )}
@@ -156,85 +164,48 @@ function App() {
           <div className="divTable">
             <table className="table">
               <thead>
-                <tr>
-                  <th className="thrank">Ranking</th>
-                  <th className="thtitle">Title</th>
-                  <th className="thyear">Year</th>
-                  <th className="threvenue">Revenue</th>
+                <tr style={{ border: '2px', borderColor: '#0B749B' }}>
+                  <th className="thStyle" style={{ textAlign: 'center' }}>Ranking</th>
+                  <th className="thStyle">Title</th>
+                  <th className="thStyle">Year</th>
+                  <th className="thStyle">Revenue</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {movies.map((item, index) => {
+                {!isLoading && movies.length > 0 && movies.map((item, index) => {
                   return (
-                    <tr key={index}>
-                      <td className="tdRank">{index + 1}</td>
+                    <tr key={index} style={{ verticalAlign: "middle !important" }}>
+                      <td className="tdStyle" style={{ textAlign: 'center' }}>{index + 1}</td>
 
-                      <td className="tdTitle">{item.title}</td>
+                      <td className="tdStyle" style={{ width: '50%' }}>{item.title}</td>
 
-                      <td className="tdYear">{item.year}</td>
+                      <td className="tdStyle">{item.year}</td>
 
-                      <td className="tdRevenue">${item.revenue}</td>
+                      <td className="tdStyle">${item.revenue}</td>
 
-                      <td>
-                        <button
-                          className="eye"
-                          onClick={() => fetchMoviesById(item.id)}
-                        >
-                          <AiFillEye />
-                        </button>
-                      </td>
+                      <td className="tdStyle"><button className="btnDetail" onClick={() => fetchMoviesById(item.id)}> <AiFillEye /></button></td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
-
             {popuptogle && (
               <div className="pop_up_container">
                 <div className="pop_up_body">
-                  <div className="linha">
-                    <h1 className="popTitle">{moviesById.title}</h1>
-                  </div>
-                  <div className="linha">
-                    <button className="bclose" onClick={fetchMoviesById}>
-                      X{" "}
-                    </button>
+                  <div class="container" style={{marginLeft:'40px'}}>
+                    <div class="row">
+                      <div class="col-sm">
+                        <div className=" bg-primary text-start">{moviesById.actors}</div>
+                      </div>
+                      <div class="col-sm">
+                        <div class=" bg-primary text-start">$42</div>
+                      </div>
+                    </div>
 
-                    <p className="pClose">CLOSE</p>
                   </div>
-                  <div className="pop_up_content">
-                    <div className="espaco"> </div>
-                    <p className="popYear">Year</p>
-                    <p className="popRYear">{moviesById.year}</p>
-                    <p className="popGenre">Genre</p>
-                    <p className="popRGenre">{moviesById.genre}</p>
-                    <p className="popDescription">Description</p>
-                    <p className="popRDescription">{moviesById.description}</p>
-                    <div className="linha">
-                      <p className="popDirector">Director</p>
-                    </div>
-                    <div className="linha">
-                      <p className="popActors">Actors</p>
-                    </div>
-                    <br />
-                    <div className="linha">
-                      <p className="popRDirector">{moviesById.director}</p>
-                    </div>
-                    <div className="linha">
-                      <p className="popRActors">{moviesById.actors}</p>
-                    </div>
-                    <p className="popRutime">Runtime</p>
-                    <p className="popRRuntime">{moviesById.runtime} mins</p>
-                    <p className="popRating">Rating</p>
-                    <p className="popRRating">{moviesById.rating}</p>
-                    <p className="popVotes">Votes</p>
-                    <p className="popRVotes">{moviesById.votes}</p>
-                    <p className="popRevenue">Revenue</p>
-                    <p className="popRRevenue">${moviesById.revenue}</p>
-                    <p className="popMetascore">Metascore</p>
-                    <p className="popRMetascore">{moviesById.metascore}</p>
-                  </div>
+
+
                 </div>
               </div>
             )}

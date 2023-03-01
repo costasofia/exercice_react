@@ -1,8 +1,3 @@
-.p {
-  /* Center horizontally*/
-  text-align: center;
-}
-
 .retangulo {
   width: 99vw;
   display: grid;
@@ -13,50 +8,26 @@
   background: #012433 0% 0% no-repeat padding-box;
   opacity: 1;
 }
-.container {
-  width: 99vw;
-  height: 99vh;
-  /*background: #6c7a89;*/
+
+.flex-container {
   display: flex;
-  flex-direction: row;
+
+  /*isso centraliza o texto horizontalmente*/
   justify-content: center;
+
+  /*isso centraliza o texto verticalmente*/
   align-items: center;
-  margin-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 1.2rem;
+  /*background: #00008b;*/
 }
 .box {
-  width: 900px;
-  height: 705px;
-  /*background: #fff;*/
-  margin-bottom: 20px;
+  width: 60%;
+  height: 100%;
+  /* background: #fff;*/
 }
-/*
-@media (min-height:50px) {
-  .container {
-    width: 99vw;
-    height: 99vh;
- 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-   margin-bottom: 40px;
-    padding-top: 20px;
-  
-  }
-}@media (max-height:500px) {
-  .container {
-    width: 99vw;
-    height: 99vh;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  
-   
-  }
-}
-*/
 .title {
   margin-top: 40px;
   font: var(--unnamed-font-style-normal) normal
@@ -70,55 +41,44 @@
   color: #386071;
   opacity: 1;
 }
-.btop10 {
-  top: 135px;
-  left: 212px;
-  width: 108px;
-  height: 30px;
-  /* UI Properties */
-  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #78849e66;
-  border-radius: 20px;
-  opacity: 1;
-}
-.btop10Y {
-  top: 135px;
-  left: 338px;
-  width: 180px;
-  height: 30px;
-  /* UI Properties */
-  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #78849e66;
-  border-radius: 20px;
-  opacity: 1;
-  margin-left: 18px;
-}
 
-.btop10Y:hover {
+.btnTop10{
+  font-size:14px;
+  color:#78849E;
+  font-family: normal normal medium 12px/14px Roboto;
+  text-align: center;
+  padding-left:20px;
+  padding-right: 20px;
+  margin-right: 15px;
+  border-radius: 20px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #78849e66;
+  opacity: 1;
+  text-align: center;
+}
+.btnTop10Y{
+  font-size:14px;
+  color:#78849E;
+  font-family:normal normal medium 12px/14px Roboto;
+  text-align:center;
+  padding-left:20px;
+  padding-right: 18px;
+  margin-right: 5px;
+  border-radius: 20px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #78849e66;
+}
+.btnTop10Y:hover {
+  color: #012433;
   background: #14b3e4 0% 0% no-repeat padding-box;
 }
-.refresh {
-  top: 135px;
-  left: 338px;
-  width: 20px;
-  height: 30px;
-  margin-left: 4px;
-  margin-top: 25px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 2px;
-  opacity: 1;
 
-  border-radius: 20px;
-  padding-left: 2px;
-}
 
 .menu {
   position: absolute;
 
   list-style-type: none;
-  margin-left: 180px;
+  margin-left: 175px;
   margin-top: -20px;
   padding: 0;
   border: 1px solid grey;
@@ -132,7 +92,7 @@
 }
 
 .menu > li:hover {
-  background-color: lightgray;
+  background-color: white;
 }
 
 .menu > li > button {
@@ -142,13 +102,14 @@
   background: none;
   color: inherit;
   border: none;
-  padding: 5px;
+  padding: 2px;
   margin: 0;
   font: inherit;
   cursor: pointer;
 }
 
 .messageSelect {
+  margin-top: 10px;
   font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) var(--unnamed-font-size-12) / 14px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
@@ -158,162 +119,54 @@
   color: #78849eb9;
   opacity: 1;
 }
-.divButtons {
-  margin-top: 40px;
-}
-
-.eye {
-  top: 135px;
-  height: 50px;
-  width: 108px;
-  text-align: center;
+.btnRefresh{
+  margin-right: 15px;
+  border:none;
   background: #ffffff 0% 0% no-repeat padding-box;
-  color: #536b7a;
-  border: none;
   opacity: 1;
+  font-family: normal normal 300 12px/14px Roboto;
+  text-align: center;
 }
-
 
 .divTable {
   margin-bottom: 20px;
   padding-bottom: 5px;
 }
-table {
+table #table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 40px;
   padding-bottom: 20px;
   margin-bottom: 80px;
 }
-td {
-  border-color: #14b3e4;
 
-  border-style: solid;
-  border-bottom-width: 1px;
-  border-top-width: 0;
-  border-right-width: 0;
-  border-left-width: 0;
-  margin-bottom: 20px;
-}
-th {
-  border-color: #14b3e4;
-
-  border-style: solid;
-  border-bottom-width: 1px;
-  border-top-width: 0;
-  border-right-width: 0;
-  border-left-width: 0;
-}
-
-.thyear {
-  width: 20%;
-  height: 13px;
-  /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-    var(--unnamed-font-size-10) / 20px Roboto;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: left;
-  font: normal normal bold 20px/20px Roboto;
-  letter-spacing: 0px;
-  color: #0b749b;
-  opacity: 1;
-}
-
-.threvenue {
-  width: 20%;
+.thStyle {
  
-  height: 13px;
-  /* UI Properties */
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-    var(--unnamed-font-size-10) / 20px Roboto;
+height: 13px;
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-10)/20px Roboto;
   letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: left;
-  font: normal normal bold 20px/20px Roboto;
-  letter-spacing: 0px;
-  color: #0b749b;
-  opacity: 1;
+font: normal normal bold 16px/20px Roboto;
+letter-spacing: 0px;
+color: #0B749B;
 }
-.thrank {
-
-  width: 10%;
-  height: 13px;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-    var(--unnamed-font-size-10) / 20px Roboto;
-  letter-spacing: var(--unnamed-character-spacing-0);
+.tdStyle {
+  height: 50px;
   text-align: left;
-  font: normal normal bold 20px/20px Roboto;
+  vertical-align: middle;
   letter-spacing: 0px;
-  color: #0b749b;
-  opacity: 1;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.thtitle {
-  padding-left: 20px;
-  width: 40px;
-  height: 13px;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-    var(--unnamed-font-size-10) / 20px Roboto;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: left;
-  font: normal normal bold 20px/20px Roboto;
-  letter-spacing: 0px;
-  color: #0b749b;
-  opacity: 1;
-}
-
-.tdRank {
-  width: 10%;
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) 16px/20px Roboto;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: center;
-  font: normal normal normal 16px/20px Roboto;
-  letter-spacing: 0px;
+  margin-top: 50px;
+  justify-content: center;
   color: #536b7a;
   opacity: 1;
+  font: normal normal normal 16px Roboto;
 }
-.tdTitle {
-  padding-left: 20px;
-
-  width: 50%;
-  height: 19px;
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) 16px/20px Roboto;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: left;
-  font: normal normal normal 16px/20px Roboto;
-  letter-spacing: 0px;
+.btnDetail{
+  vertical-align: middle !important;
+  border: none;
+  align-items: center;
+  justify-Content: center;
+  display: flex;
   color: #536b7a;
   opacity: 1;
+  background: #ffffff 0% 0% no-repeat padding-box;
 }
-.tdYear {
-  width: 20%;
-  height: 19px;
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) 16px/20px Roboto;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: left ;
-  font: normal normal normal 16px/20px Roboto;
-  letter-spacing: 0px;
-  color: #536b7a;
-  opacity: 1;
-  padding-right: 15px;
-}
-
-.tdRevenue {
-  width: 20%;
-  height: 19px;
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) 16px/20px Roboto;
-  letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: left;
-  font: normal normal normal 16px/20px Roboto;
-  letter-spacing: 0px;
-  color: #536b7a;
-  opacity: 1;
-}
-
-
-
