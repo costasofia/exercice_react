@@ -27,7 +27,7 @@ function App() {
   const [moviesPage, setMoviesPage] = useState(10);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
- ;
+  ;
   const [moviesById, setMoviesById] = useState({
     title: "",
     year: "",
@@ -51,66 +51,65 @@ function App() {
   const handleOpen = () => {
     setOpen(!open);
   };
-  
-//--------------------------------------------Scroll----------------------------------------------------//
-  useEffect(()=> {
-    fetchAllMoviesByPage();
-  },[page]);
 
-  useEffect(()=> {
+  //--------------------------------------------Scroll----------------------------------------------------//
+  useEffect(() => {
+    fetchAllMoviesByPage();
+  }, [page]);
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  },[loading])
+  }, [loading])
 
-  function handleScroll(){
-    if(page==totalPage || loading){
+  function handleScroll() {
+    if (page == totalPage || loading) {
       console.log('ola')
-     
+
       return;
     }
-    
+
     else if (window.innerHeight + document.documentElement.scrollTop + 1 >=
       document.documentElement.scrollHeight) {
-      
+
       setPage((prev) => prev + 1);
-    } 
+    }
   }
-  function fetchAllMoviesByPage(){
+  function fetchAllMoviesByPage() {
     setLoading(true);
-    fetch(`http://localhost:4000/movies/m?page=${page}&size=${moviesPage}`,{
+    fetch(`http://localhost:4000/movies/?page=${page}&size=${moviesPage}`, {
       method: "GET"
     })
-    .then(response =>{ 
-      setTotalPage(Math.round((response.headers.get("X-Total-Count")/moviesPage)-0.6));
-      console.log(totalPage);
-     return response.json();
-    })
-    .then(data => {
-      setMovies([...movies,...data]);
-      setLoading(false);
-    //  console.log(movies);
-    });
+      .then(response => {
+        setTotalPage(Math.round((response.headers.get("X-Total-Count") / moviesPage) - 0.6));
+        console.log(totalPage);
+        return response.json();
+      })
+      .then(data => {
+        setMovies([...movies, ...data]);
+        setLoading(false);
+        //  console.log(movies);
+      });
   }
-//------------------------------------------Buttons--------------------------------------------------------//
+  //------------------------------------------Buttons--------------------------------------------------------//
   const [allMovies, setAllMovies] = useState();
 
-  function fetchAllMovies() {
-    return axios.get("http://localhost:4000/m").then(function (response) {
+  /*function fetchAllMovies() {
+    return axios.get("http://localhost:4000/movies/?size=10&column=revenue,desc").then(function (response) {
       setMovies(response.data);
 
     });
   }
   useEffect(() => {
     fetchAllMovies();
-  },[]);
+  },[]);*/
   const btnTop10Revenue = () => {
 
-    let allByMovies = movies.map((element) => element);
-    console.log(allByMovies);
-    let moviesTop10ByRevenue = allByMovies
-      .sort((a, b) => b.revenue - a.revenue)
-      .slice(0, 10);
-    setMovies(moviesTop10ByRevenue);
+    return axios
+      .get("http://localhost:4000/movies/?size=10&column=revenue,desc")
+      .then(function (response) {
+        setMovies(response.data)
+      })
   };
 
   const btnTop10RevenueYear = (e) => {
@@ -129,7 +128,7 @@ function App() {
     setMovies(moviesTop10ByRevenueYear);
     setShow(!show);
   };
-//--------------------------------------------------Detail-----------------------------------------------------//
+  //--------------------------------------------------Detail-----------------------------------------------------//
   const fetchMoviesById = (id) => {
     let idMovie = id;
 
@@ -140,7 +139,7 @@ function App() {
         setpopuptogle(!popuptogle);
       });
   };
-//------------------------------------------------------------------------------------------------------//
+  //------------------------------------------------------------------------------------------------------//
   return (
     <>
       <nav
@@ -312,13 +311,13 @@ function App() {
                       <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Metascore</Col>
                     </Row>
                     <Row>
-                      <Col sm className="colReturned" style={{ paddingLeft: '10%', paddingBottom:'20px' }}>{moviesById.metascore}</Col>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%', paddingBottom: '20px' }}>{moviesById.metascore}</Col>
                     </Row>
                   </Container>
                 </div>
               </div>
             )}
-          
+
 
           </div>
         </div>

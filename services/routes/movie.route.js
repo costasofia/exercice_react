@@ -101,7 +101,7 @@ movie.get("/allMovies", async (req, res) => {
 });
 */
 
-movie.get("/m", async (req, res) => {
+movie.get("/", async (req, res) => {
   const page = Number.parseInt(req.query.page) ? Number.parseInt(req.query.page) : null;
   const size = Number.parseInt(req.query.size) ? Number.parseInt(req.query.size) : null;
   const year = Number.parseInt(req.query.year)
@@ -143,7 +143,7 @@ movie.get("/:id", (req, res) => {
     });
 });
 
-
+/*
 movie.get("/", (req, res) => {
   Movie.findAll()
     .then((data) => {
@@ -155,5 +155,5 @@ movie.get("/", (req, res) => {
       console.log("erro");
     });
 });
-
+*/
 module.exports = movie;
