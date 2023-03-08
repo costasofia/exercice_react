@@ -79,14 +79,13 @@
 
 .menu {
   position: absolute;
-
   list-style-type: none;
   margin-left: 175px;
-  margin-top: -20px;
+  margin-top: -30px;
   padding: 0;
   border: 1px solid grey;
   width: 150px;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
 }
 
 .menu > li {
@@ -96,7 +95,7 @@
 
 .menu > li:hover {
   background-color: white;
-  background-color: #00baff;
+
   border-radius: 2%;
 }
 
@@ -105,7 +104,7 @@
   height: 100%;
   text-align: left;
   background: none;
-
+  display: inline-block;
   border: none;
   padding: 2px;
   margin: 0;
