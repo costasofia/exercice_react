@@ -19,12 +19,15 @@ import Button from "react-bootstrap/Button";
 
 function App() {
   let offset = 0;
-
   const refreshWindow = () => window.location.reload(true);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [show, setShow] = useState(false);
+  const [hasMore, setHashMore] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [moviesPage, setMoviesPage] = useState(10);
+  const [loading, setLoading] = useState(true);
+  const [show, setShow] = useState(false);
+ ;
   const [moviesById, setMoviesById] = useState({
     title: "",
     year: "",
@@ -48,48 +51,63 @@ function App() {
   const handleOpen = () => {
     setOpen(!open);
   };
+  
+//--------------------------------------------Scroll----------------------------------------------------//
+  useEffect(()=> {
+    fetchAllMoviesByPage();
+  },[page]);
 
-  let limit = 10;
-  const fetchAllMovies = () => {
-    setIsLoading(true);
-    axios
-      .get(`http://localhost:4000/movies?limitQuery=${limit}&offset=${offset}`)
-      .then(({ data }) => {
+  useEffect(()=> {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  },[loading])
 
-
-        const newMovies = [];
-        data.forEach((data) => newMovies.push(data));
-
-        setMovies((oldMovies) => [...oldMovies, ...newMovies]);
-        //    console.log(data)
-          console.log(newMovies);
-          setIsLoading(false);
-      });
-
-    offset += 10;
-  };
-
-  //  console.log(movies);
-
-  const handleScroll = (e) => {
-    // console.log('ola')
-    if (
-      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
-      e.target.documentElement.scrollHeight
-    ) {
-      fetchAllMovies();
+  function handleScroll(){
+    if(page==totalPage || loading){
+      console.log('ola')
+     
+      return;
     }
-  };
+    
+    else if (window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight) {
+      
+      setPage((prev) => prev + 1);
+    } 
+  }
+  function fetchAllMoviesByPage(){
+    setLoading(true);
+    fetch(`http://localhost:4000/movies/m?page=${page}&size=${moviesPage}`,{
+      method: "GET"
+    })
+    .then(response =>{ 
+      setTotalPage(Math.round((response.headers.get("X-Total-Count")/moviesPage)-0.6));
+      console.log(totalPage);
+     return response.json();
+    })
+    .then(data => {
+      setMovies([...movies,...data]);
+      setLoading(false);
+    //  console.log(movies);
+    });
+  }
+//------------------------------------------Buttons--------------------------------------------------------//
+  const [allMovies, setAllMovies] = useState();
+
+  function fetchAllMovies() {
+    return axios.get("http://localhost:4000/m").then(function (response) {
+      setMovies(response.data);
+
+    });
+  }
   useEffect(() => {
     fetchAllMovies();
-    window.addEventListener("scroll", handleScroll);
-  }, []);
-
+  },[]);
   const btnTop10Revenue = () => {
-    console.log(movies);
-    let allMovies = movies.map((element) => element);
-    console.log(allMovies);
-    let moviesTop10ByRevenue = allMovies
+
+    let allByMovies = movies.map((element) => element);
+    console.log(allByMovies);
+    let moviesTop10ByRevenue = allByMovies
       .sort((a, b) => b.revenue - a.revenue)
       .slice(0, 10);
     setMovies(moviesTop10ByRevenue);
@@ -111,7 +129,7 @@ function App() {
     setMovies(moviesTop10ByRevenueYear);
     setShow(!show);
   };
-
+//--------------------------------------------------Detail-----------------------------------------------------//
   const fetchMoviesById = (id) => {
     let idMovie = id;
 
@@ -122,7 +140,7 @@ function App() {
         setpopuptogle(!popuptogle);
       });
   };
-
+//------------------------------------------------------------------------------------------------------//
   return (
     <>
       <nav
@@ -134,12 +152,27 @@ function App() {
       ></nav>
       <div className="flex-container">
         <div className="box">
-          <h1 className="title" >Movie ranking</h1>
-          <div className="d-grid gap-3 d-md-block" style={{ marginTop: "40px", marginBottom: '30px', verticalAlign: "middle !important" }}>
-
-            <button className="btnTop10" onClick={btnTop10Revenue}> Top 10 revenue</button>
-            <button onClick={() => setOpen(!open)}
-              defaultValue="default" className="btnTop10Y" > Top 10 revenue per Year  {open && open ? (
+          <h1 className="title">Movie ranking</h1>
+          <div
+            className="d-grid gap-3 d-md-block"
+            style={{
+              marginTop: "40px",
+              marginBottom: "30px",
+              verticalAlign: "middle !important",
+            }}
+          >
+            <button className="btnTop10" onClick={btnTop10Revenue}>
+              {" "}
+              Top 10 revenue
+            </button>
+            <button
+              onClick={() => setOpen(!open)}
+              defaultValue="default"
+              className="btnTop10Y"
+            >
+              {" "}
+              Top 10 revenue per Year{" "}
+              {open && open ? (
                 <ul className="menu">
                   <p className="messageSelect">Select a year</p>
 
@@ -154,7 +187,8 @@ function App() {
                     </li>
                   ))}
                 </ul>
-              ) : null}</button>
+              ) : null}
+            </button>
             {show && (
               <button className="btnRefresh" onClick={refreshWindow}>
                 <BiRefresh />
@@ -163,9 +197,13 @@ function App() {
           </div>
           <div className="divTable">
             <table className="table">
+
+
               <thead>
-                <tr style={{ border: '2px', borderColor: '#0B749B' }}>
-                  <th className="thStyle" style={{ textAlign: 'center' }}>Ranking</th>
+                <tr style={{ border: "1px", borderColor: "#0B749B", opacity: "0.6" }}>
+                  <th className="thStyle" style={{ textAlign: "center" }}>
+                    Ranking
+                  </th>
                   <th className="thStyle">Title</th>
                   <th className="thStyle">Year</th>
                   <th className="thStyle">Revenue</th>
@@ -173,42 +211,115 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {!isLoading && movies.length > 0 && movies.map((item, index) => {
+                {movies.map((item, index) => {
                   return (
-                    <tr key={index} style={{ verticalAlign: "middle !important" }}>
-                      <td className="tdStyle" style={{ textAlign: 'center' }}>{index + 1}</td>
+                    <tr
+                      key={index}
+                      style={{ verticalAlign: "middle !important" }}
+                    >
+                      <td className="tdStyle" style={{ textAlign: "center" }}>
+                        {index + 1}
+                      </td>
 
-                      <td className="tdStyle" style={{ width: '50%' }}>{item.title}</td>
+                      <td className="tdStyle" style={{ width: "50%" }}>
+                        {item.title}
+                      </td>
 
                       <td className="tdStyle">{item.year}</td>
 
                       <td className="tdStyle">${item.revenue}</td>
 
-                      <td className="tdStyle"><button className="btnDetail" onClick={() => fetchMoviesById(item.id)}> <AiFillEye /></button></td>
+                      <td className="tdStyle">
+                        <button
+                          className="btnDetail"
+                          onClick={() => fetchMoviesById(item.id)}
+                        >
+                          {" "}
+                          <AiFillEye />
+                        </button>
+                      </td>
                     </tr>
                   );
                 })}
               </tbody>
+
             </table>
+
             {popuptogle && (
               <div className="pop_up_container">
                 <div className="pop_up_body">
-                  <div class="container" style={{marginLeft:'40px'}}>
-                    <div class="row">
-                      <div class="col-sm">
-                        <div className=" bg-primary text-start">{moviesById.actors}</div>
-                      </div>
-                      <div class="col-sm">
-                        <div class=" bg-primary text-start">$42</div>
-                      </div>
-                    </div>
-
-                  </div>
-
-
+                  <Container>
+                    <Row>
+                      <Col md={9} className="colTitle" style={{ paddingLeft: '10%', marginTop: '30px' }}>{moviesById.title}</Col>
+                      <Col md={{ span: 1, offset: 1 }} style={{ color: '#000', paddingLeft: '10%', textAlign: 'center', fontSize: '10px', marginTop: '30px', border: 'none' }} onClick={fetchMoviesById}><button style={{ background: '#ffffff 0% 0% no-repeat padding-box', color: '#718FA2', border: 'none', marginLeft: '6px' }}>X</button>
+                        <p style={{ color: '#718FA2', font: 'var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 8px/16px Roboto', font: 'normal normal normal 8px/16px Roboto', opacity: '1', letterSpacing: '0.64px' }}>CLOSE</p>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md={1} style={{ paddingLeft: '10%', marginTop: '10px' }}><div style={{ width: '52px', border: '2px solid var(--unnamed-color-21b3cf)', background: 'transparent 0% 0% no-repeat padding-box', border: '2px solid #21B3CF', opacity: '1' }}></div></Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '20px' }}>Year</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%' }}>{moviesById.year}</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Genre</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%' }}>{moviesById.genre}</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Description</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%', paddingRight: '10%' }}>{moviesById.description}</Col>
+                    </Row>
+                    <Row>
+                      <Col md={4} className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Director </Col>
+                      <Col md={8} className="colName" style={{ marginTop: '10px' }}>Actors</Col>
+                    </Row>
+                    <Row>
+                      <Col md={4} className="colReturned" style={{ paddingLeft: '10%', color: '#00BAFF' }}>{moviesById.director} </Col>
+                      <Col md={8} className="colReturned" style={{ paddingRight: '10%', color: '#00BAFF' }}>{moviesById.actors}</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Runtime</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%' }}>{moviesById.runtime} min</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Rating</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%' }}>{moviesById.rating}</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Votes</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%' }}>{moviesById.votes}</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Revenue</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%' }}>${moviesById.revenue}</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colName" style={{ paddingLeft: '10%', marginTop: '10px' }}>Metascore</Col>
+                    </Row>
+                    <Row>
+                      <Col sm className="colReturned" style={{ paddingLeft: '10%', paddingBottom:'20px' }}>{moviesById.metascore}</Col>
+                    </Row>
+                  </Container>
                 </div>
               </div>
             )}
+          
+
           </div>
         </div>
       </div>

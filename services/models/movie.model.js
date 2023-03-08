@@ -20,7 +20,7 @@ module.exports = db.sequelize.define('movie', {
         allowNull: false
     },
     revenue:{
-        type:Sequelize.DOUBLE,
+        type:Sequelize.INTEGER,
         allowNull: false
     },
     genre:{
